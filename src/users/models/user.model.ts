@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { UserStatusEnum } from '@prisma/client';
 
 @ObjectType()
 export class UserModel {
@@ -7,6 +8,9 @@ export class UserModel {
 
   @Field(() => String)
   name: string;
+
+  @Field(() => UserStatusEnum)
+  status: UserStatusEnum;
 
   @Field(() => Date)
   createdAt: Date;
@@ -17,4 +21,9 @@ export class UserModel {
       'This field will only be available after the first record update',
   })
   updatedAt: Date | null;
+
+  @Field(() => Date, {
+    nullable: true,
+  })
+  deletedAt: Date | null;
 }

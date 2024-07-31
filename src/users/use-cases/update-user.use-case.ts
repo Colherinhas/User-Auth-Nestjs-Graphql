@@ -1,7 +1,13 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UserRepository } from '../users.repository';
 import { UserModel } from '../models/user.model';
 import { UpdateUserDto } from '../dtos/update-user.dto';
+import { UserStatusEnum } from '@prisma/client';
 
 @Injectable()
 export class UpdateUserUseCase {
@@ -11,6 +17,7 @@ export class UpdateUserUseCase {
   public async execute(data: UpdateUserDto): Promise<UserModel> {
     try {
       await this.validateUser(data.id);
+
       return this.$user.updateUser(data);
     } catch (error) {
       throw Error(error.message);
@@ -19,6 +26,12 @@ export class UpdateUserUseCase {
 
   private async validateUser(id: string): Promise<void> {
     const existingUser = await this.$user.findUserById(id);
-    if (!existingUser) throw new NotFoundException('User not found.');
+
+    if (!existingUser) {
+      throw new NotFoundException('User not found or deleted.');
+    }
+    if (existingUser.status === UserStatusEnum.BANNED) {
+      throw new BadRequestException('User banned.');
+    }
   }
 }

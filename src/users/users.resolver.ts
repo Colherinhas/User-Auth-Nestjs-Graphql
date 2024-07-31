@@ -8,6 +8,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UpdateUserUseCase } from './use-cases/update-user.use-case';
 import { FindUserByIdUseCase } from './use-cases/find-user-by-id.use-case';
+import { SoftDeleteUserUseCase } from './use-cases/soft-delete-user.use-case';
 
 @Resolver()
 export class UserResolver {
@@ -19,6 +20,8 @@ export class UserResolver {
   private readonly $create: CreateUserUseCase;
   @Inject(UpdateUserUseCase)
   private readonly $update: UpdateUserUseCase;
+  @Inject(SoftDeleteUserUseCase)
+  private readonly $softDelete: SoftDeleteUserUseCase;
 
   @Query(() => UserModel, { name: 'user' })
   public async findUserById(
@@ -55,4 +58,16 @@ export class UserResolver {
   ): Promise<UserModel> {
     return this.$update.execute(data);
   }
+
+  @Mutation(() => UserModel, { name: 'deleteUser' })
+  public async deleteUser(
+    @Args('id', {
+      type: () => String,
+    })
+    id: string,
+  ): Promise<UserModel> {
+    return this.$softDelete.execute(id);
+  }
 }
+
+//TODO unban user mutation
