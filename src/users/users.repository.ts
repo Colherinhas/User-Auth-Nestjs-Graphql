@@ -7,6 +7,11 @@ export class UserRepository {
   @Inject(DbConnection)
   private $db: DbConnection;
 
+  public async findUserById(id: string): Promise<User> {
+    return this.$db.user.findUnique({
+      where: { id },
+    });
+  }
   public async findUsers(
     filters?: Partial<Prisma.UserWhereInput>,
   ): Promise<User[]> {
