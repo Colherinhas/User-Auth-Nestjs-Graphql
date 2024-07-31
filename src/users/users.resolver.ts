@@ -7,15 +7,26 @@ import { CreateUserUseCase } from './use-cases/create-user.use-case';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UpdateUserUseCase } from './use-cases/update-user.use-case';
+import { FindUserByIdUseCase } from './use-cases/find-user-by-id.use-case';
 
 @Resolver()
 export class UserResolver {
+  @Inject(FindUserByIdUseCase)
+  private readonly $findUser: FindUserByIdUseCase;
   @Inject(FindUserUseCase)
   private readonly $findMany: FindUserUseCase;
   @Inject(CreateUserUseCase)
   private readonly $create: CreateUserUseCase;
   @Inject(UpdateUserUseCase)
   private readonly $update: UpdateUserUseCase;
+
+  @Query(() => UserModel, { name: 'user' })
+  public async findUserById(
+    @Args('id', { type: () => String })
+    id: string,
+  ): Promise<UserModel> {
+    return this.$findUser.execute(id);
+  }
 
   @Query(() => [UserModel], { name: 'users' })
   public async findUsers(
