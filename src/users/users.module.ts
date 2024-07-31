@@ -6,6 +6,7 @@ import { FindUserUseCase } from './use-cases/find-users.use-case';
 import { CreateUserUseCase } from './use-cases/create-user.use-case';
 import { UpdateUserUseCase } from './use-cases/update-user.use-case';
 import { FindUserByIdUseCase } from './use-cases/find-user-by-id.use-case';
+import { SoftDeleteUserUseCase } from './use-cases/soft-delete-user.use-case';
 
 @Module({
   imports: [forwardRef(() => SharedModule)],
@@ -18,6 +19,7 @@ import { FindUserByIdUseCase } from './use-cases/find-user-by-id.use-case';
     FindUserUseCase,
     CreateUserUseCase,
     UpdateUserUseCase,
+    SoftDeleteUserUseCase,
   ],
   exports: [UserRepository],
 })

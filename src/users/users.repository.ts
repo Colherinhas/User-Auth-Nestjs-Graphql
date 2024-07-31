@@ -19,6 +19,7 @@ export class UserRepository {
     return this.$db.user.findMany({
       where: {
         ...userFilters,
+        deletedAt: null,
       },
     });
   }
@@ -36,7 +37,14 @@ export class UserRepository {
   ): Promise<User> {
     return this.$db.user.update({
       where: { id: data.id as string },
-      data: { ...data },
+      data: { ...data, deletedAt: null },
+    });
+  }
+
+  public async softDeleteUser(id: string): Promise<User> {
+    return this.$db.user.update({
+      where: { id },
+      data: { deletedAt: new Date(), updatedAt: new Date() },
     });
   }
 }
