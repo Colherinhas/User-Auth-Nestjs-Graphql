@@ -22,9 +22,15 @@ export class SoftDeleteUserUseCase {
   }
 
   private async verifyUser(id: string): Promise<void> {
+    if (!id) {
+      throw new BadRequestException('Id must not be empty.');
+    }
     const existingUser = await this.$user.findUserById(id);
-    if (existingUser.deletedAt)
+    if (existingUser.deletedAt) {
       throw new BadRequestException('User already deleted.');
-    if (!existingUser) throw new NotFoundException('User not found.');
+    }
+    if (!existingUser) {
+      throw new NotFoundException('User not found.');
+    }
   }
 }

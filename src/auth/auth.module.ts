@@ -1,5 +1,4 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { JwtModule, JwtService } from '@nestjs/jwt';
 import { SharedModule } from 'src/shared/shared.module';
 import { AuthResolver } from './auth.resolver';
 import { UserRepository } from 'src/users/users.repository';

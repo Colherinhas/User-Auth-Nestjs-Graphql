@@ -5,7 +5,7 @@ import { UserStatusEnum } from '@prisma/client';
 import { HashHelper } from './helpers/hash.helper';
 import { JwtHelper } from './helpers/jwt.helper';
 import { JwtGuard } from './guards/jwt-auth.guard';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -16,8 +16,8 @@ import { JwtModule } from '@nestjs/jwt';
       },
     }),
   ],
-  providers: [DbConnection, HashHelper, JwtHelper, JwtGuard],
-  exports: [DbConnection, HashHelper, JwtHelper, JwtGuard],
+  providers: [DbConnection, HashHelper, JwtHelper, JwtGuard, JwtService],
+  exports: [DbConnection, HashHelper, JwtHelper, JwtGuard, JwtService],
 })
 export class SharedModule {
   constructor() {

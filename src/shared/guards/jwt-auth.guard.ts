@@ -25,11 +25,10 @@ export class JwtGuard implements CanActivate {
     const token = request.headers.authorization?.split(' ')[1];
     try {
       const decoded = this.$jwt.verify(token, {
-        secret: process.env.JWT_SECRET,
+        secret: process.env.JWT_KEY,
       });
-
       if (!decoded.id) {
-        throw new ForbiddenException('Invalid token.');
+        throw new ForbiddenException('Not decoded user correctly.');
       }
 
       request.user = decoded;
