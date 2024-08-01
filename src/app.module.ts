@@ -7,6 +7,7 @@ import {
 } from '@nestjs/apollo';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UserModule } from './users/users.module';
     }),
     forwardRef(() => SharedModule),
     UserModule,
+    AuthModule,
   ],
   providers: [],
 })

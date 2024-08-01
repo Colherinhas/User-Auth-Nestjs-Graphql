@@ -2,7 +2,7 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { UserStatusEnum } from '@prisma/client';
 
 @ObjectType()
-export class UserModel {
+export class UserResponseModel {
   @Field(() => ID)
   id: string;
 
@@ -11,9 +11,6 @@ export class UserModel {
 
   @Field(() => String)
   email: string;
-
-  @Field(() => String)
-  password: string;
 
   @Field(() => UserStatusEnum)
   status: UserStatusEnum;

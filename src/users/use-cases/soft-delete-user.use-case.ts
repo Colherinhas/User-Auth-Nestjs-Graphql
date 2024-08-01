@@ -5,14 +5,14 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { UserRepository } from '../users.repository';
-import { UserModel } from '../models/user.model';
+import { UserResponseModel } from '../models/user-response.model';
 
 @Injectable()
 export class SoftDeleteUserUseCase {
   @Inject(UserRepository)
   private readonly $user: UserRepository;
 
-  public async execute(id: string): Promise<UserModel> {
+  public async execute(id: string): Promise<UserResponseModel> {
     try {
       await this.verifyUser(id);
       return this.$user.softDeleteUser(id);

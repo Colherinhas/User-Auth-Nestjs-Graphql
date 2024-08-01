@@ -1,15 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from '../users.repository';
-import { UserModel } from '../models/user.model';
+import { UserResponseModel } from '../models/user-response.model';
 
 @Injectable()
 export class FindUserByIdUseCase {
   @Inject(UserRepository)
   private readonly $user: UserRepository;
 
-  public async execute(id: string): Promise<UserModel> {
+  public async execute(id: string): Promise<UserResponseModel> {
     try {
-      return this.$user.findUserById(id);
+      const user = await this.$user.findUserById(id);
+      return user;
     } catch (error) {
       throw Error(error.message);
     }

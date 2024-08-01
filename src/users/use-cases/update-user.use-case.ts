@@ -5,16 +5,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { UserRepository } from '../users.repository';
-import { UserModel } from '../models/user.model';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { UserStatusEnum } from '@prisma/client';
+import { UserResponseModel } from '../models/user-response.model';
 
 @Injectable()
 export class UpdateUserUseCase {
   @Inject(UserRepository)
   private readonly $user: UserRepository;
 
-  public async execute(data: UpdateUserDto): Promise<UserModel> {
+  public async execute(data: UpdateUserDto): Promise<UserResponseModel> {
     try {
       await this.validateUser(data.id);
 

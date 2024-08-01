@@ -12,6 +12,14 @@ export class UserRepository {
       where: { id },
     });
   }
+
+  public async findUserByFilter(
+    filters: Partial<Prisma.UserWhereInput>,
+  ): Promise<User> {
+    return this.$db.user.findFirst({
+      where: { ...filters },
+    });
+  }
   public async findUsers(
     filters?: Partial<Prisma.UserWhereInput>,
   ): Promise<User[]> {
