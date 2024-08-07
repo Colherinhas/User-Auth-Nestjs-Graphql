@@ -37,7 +37,7 @@ const seedUser = async () => {
       name: 'User Banned',
       email: 'user3@email.com',
       status: UserStatusEnum.BANNED,
-      cpf: '00000000003',
+      cpf: '000.000000-03',
       password,
       photoUrl:
         'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png',
@@ -46,7 +46,7 @@ const seedUser = async () => {
       id: '325a1a14-e283-4482-95c5-5c5bbe0d73c1',
       name: 'User Soft Deleted',
       email: 'user4@email.com',
-      status: UserStatusEnum.INACTIVE,
+      status: UserStatusEnum.ACTIVE,
       cpf: '00000000000',
       password,
       photoUrl:
