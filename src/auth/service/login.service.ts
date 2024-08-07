@@ -36,8 +36,10 @@ export class LoginService {
       email: data.email,
       deletedAt: null,
     });
-    if (!user || user.status === UserStatusEnum.BANNED) {
-      throw new NotFoundException('User banned or not found.');
+    if (!user || user.status === UserStatusEnum.BANNED || user.deletedAt) {
+      throw new NotFoundException(
+        'User not found. If it exists, must been banned or deleted.',
+      );
     }
     return user;
   }

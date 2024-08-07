@@ -17,7 +17,7 @@ const seedUser = async () => {
       name: 'User Active',
       email: 'user1@email.com',
       status: UserStatusEnum.ACTIVE,
-      cpf: '000.000.000-01',
+      cpf: '00000000001',
       password,
       photoUrl:
         'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png',
@@ -27,7 +27,7 @@ const seedUser = async () => {
       name: 'User Inactive',
       email: 'user2@email.com',
       status: UserStatusEnum.INACTIVE,
-      cpf: '000.000.000-02',
+      cpf: '00000000002',
       password,
       photoUrl:
         'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png',
@@ -37,7 +37,7 @@ const seedUser = async () => {
       name: 'User Banned',
       email: 'user3@email.com',
       status: UserStatusEnum.BANNED,
-      cpf: '000.000.000-03',
+      cpf: '00000000003',
       password,
       photoUrl:
         'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png',
@@ -46,8 +46,8 @@ const seedUser = async () => {
       id: '325a1a14-e283-4482-95c5-5c5bbe0d73c1',
       name: 'User Soft Deleted',
       email: 'user4@email.com',
-      status: UserStatusEnum.ACTIVE,
-      cpf: '000.000.000-00',
+      status: UserStatusEnum.INACTIVE,
+      cpf: '00000000000',
       password,
       photoUrl:
         'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png',

@@ -1,6 +1,9 @@
 {
   "name": "product-store-graphql",
   "version": "0.0.1",
+  "prisma": {
+    "seed": "ts-node prisma/seeds/seed.ts"
+  },
   "description": "",
   "author": "",
   "private": true,
