@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from '../users.repository';
 import { User } from '@prisma/client';
 import { CreateUserDto } from '../dtos/create-user.dto';
@@ -14,8 +14,7 @@ export class CreateUserUseCase {
   public async execute(data: CreateUserDto): Promise<User> {
     try {
       data.password = await this.validatePassword(data.password);
-      if (!data.password)
-        throw new Error('Error while generating password hash');
+      await this.existingUser(data.email, data.cpf);
       return this.$user.createUser(data);
     } catch (err) {
       throw Error(err.message);
@@ -24,7 +23,22 @@ export class CreateUserUseCase {
 
   private async validatePassword(password: string): Promise<string | null> {
     const hashedPassword = await this.$hash.hashPassword(password);
-    if (!hashedPassword) return null;
+    if (!hashedPassword)
+      throw new Error('Error while generating password hash');
+
     return hashedPassword;
+  }
+
+  private async existingUser(email: string, cpf: string): Promise<void> {
+    const filteremail = { email };
+    const filtercpf = { cpf };
+    let user = await this.$user.findUsers(filteremail);
+    if (user.length > 0) {
+      throw new BadRequestException('Email already in use.');
+    }
+    user = await this.$user.findUsers(filtercpf);
+    if (user.length > 0) {
+      throw new BadRequestException('CPF already in use.');
+    }
   }
 }

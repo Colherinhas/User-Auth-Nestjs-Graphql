@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Prisma, User } from '@prisma/client';
+import { Prisma, User, UserStatusEnum } from '@prisma/client';
 import { DbConnection } from 'src/shared/db/db.connection';
 
 @Injectable()
@@ -52,7 +52,11 @@ export class UserRepository {
   public async softDeleteUser(id: string): Promise<User> {
     return this.$db.user.update({
       where: { id },
-      data: { deletedAt: new Date(), updatedAt: new Date() },
+      data: {
+        status: UserStatusEnum.INACTIVE,
+        deletedAt: new Date(),
+        updatedAt: new Date(),
+      },
     });
   }
 }

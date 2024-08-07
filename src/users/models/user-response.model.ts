@@ -18,6 +18,12 @@ export class UserResponseModel {
   @Field(() => Date)
   createdAt: Date;
 
+  @Field(() => String)
+  cpf: string;
+
+  @Field(() => String)
+  photoUrl: string;
+
   @Field(() => Date, {
     nullable: true,
     description:

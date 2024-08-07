@@ -18,6 +18,12 @@ export class UserModel {
   @Field(() => UserStatusEnum)
   status: UserStatusEnum;
 
+  @Field(() => String)
+  cpf: string;
+
+  @Field(() => String)
+  photoUrl: string;
+
   @Field(() => Date)
   createdAt: Date;
 

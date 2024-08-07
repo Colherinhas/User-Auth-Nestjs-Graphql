@@ -15,4 +15,10 @@ export class UpdateUserDto {
   @Field(() => UserStatusEnum, { nullable: true })
   @IsEnum(UserStatusEnum)
   status?: UserStatusEnum;
+
+  @Field(() => String, { nullable: true })
+  cpf?: string;
+
+  @Field(() => String, { nullable: true })
+  photoUrl?: string;
 }
