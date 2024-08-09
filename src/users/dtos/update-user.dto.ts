@@ -12,6 +12,12 @@ export class UpdateUserDto {
   @Field(() => String, { nullable: true })
   name?: string;
 
+  @Field(() => String, { nullable: true })
+  address?: string;
+
+  @Field(() => String, { nullable: true })
+  phone?: string;
+
   @Field(() => UserStatusEnum, { nullable: true })
   @IsEnum(UserStatusEnum)
   status?: UserStatusEnum;

@@ -8,16 +8,69 @@ datasource db {
 }
 
 model User {
-  id        String         @id @unique @default(uuid())
-  cpf       String        @unique
-  name      String
-  email     String         @unique
-  password  String
-  photoUrl  String?
-  status    UserStatusEnum @default(ACTIVE)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime?      @updatedAt
-  deletedAt DateTime?
+  id               String            @id @unique @default(uuid())
+  cpf              String            @unique
+  name             String
+  email            String            @unique
+  userSocialMedias UserSocialMedia[]
+  repositories     UserRepositories[]
+  phone            String?
+  address          String?
+  password         String
+  photoUrl         String?
+  status           UserStatusEnum    @default(ACTIVE)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime?         @updatedAt
+  deletedAt        DateTime?
+}
+
+model UserRepositories {
+  id        String        @id @unique @default(uuid())
+  language  LanguageEnum?
+  link      String
+  userId    String
+  user      User          @relation(fields: [userId], references: [id])
+  createdAt DateTime      @default(now())
+}
+
+model UserSocialMedia {
+  id          String          @id @unique @default(uuid())
+  link        String
+  socialMedia SocialMediaEnum
+  userId      String
+  user        User            @relation(fields: [userId], references: [id])
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime?       @updatedAt
+}
+
+enum LanguageEnum {
+  JavaScript
+  Python
+  Java
+  CSHARP
+  CPLUSPLUS
+  PHP
+  TypeScript
+  Ruby
+  Swift
+  Go
+  Kotlin
+  Rust
+  Dart
+  Scala
+  ShellScripting
+  Perl
+  ObjectiveC
+  R
+  Elixir
+  Haskell
+}
+
+enum SocialMediaEnum {
+  INSTAGRAM
+  FACEBOOK
+  LINKEDIN
+  GITHUB
 }
 
 enum UserStatusEnum {

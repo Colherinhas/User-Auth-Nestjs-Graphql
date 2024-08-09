@@ -1,5 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { UserStatusEnum } from '@prisma/client';
+import { UserRepositoriesModel } from '../user-repositories/models/user-repositories.model';
+import { UserSocialMediasModel } from '../user-social-media/models/user-social-medias.model';
 
 @ObjectType()
 export class UserModel {
@@ -18,14 +20,14 @@ export class UserModel {
   @Field(() => UserStatusEnum)
   status: UserStatusEnum;
 
+  @Field(() => Date)
+  createdAt: Date;
+
   @Field(() => String)
   cpf: string;
 
   @Field(() => String)
   photoUrl: string;
-
-  @Field(() => Date)
-  createdAt: Date;
 
   @Field(() => Date, {
     nullable: true,
@@ -38,4 +40,10 @@ export class UserModel {
     nullable: true,
   })
   deletedAt: Date | null;
+
+  @Field(() => [UserSocialMediasModel], { nullable: true })
+  userSocialMedias?: UserSocialMediasModel[];
+
+  @Field(() => [UserRepositoriesModel], { nullable: true })
+  repositories?: UserRepositoriesModel[];
 }

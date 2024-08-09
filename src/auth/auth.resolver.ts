@@ -14,6 +14,7 @@ export class AuthResolver {
     @Args('data', { type: () => UserLoginDto })
     data: UserLoginDto,
   ): Promise<AuthModel> {
+    console.log('tentou fazer login');
     return this.$login.execute(data);
   }
 }

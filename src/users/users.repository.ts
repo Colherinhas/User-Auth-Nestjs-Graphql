@@ -10,6 +10,7 @@ export class UserRepository {
   public async findUserById(id: string): Promise<User> {
     return this.$db.user.findUnique({
       where: { id },
+      include: { userSocialMedias: true, repositories: true },
     });
   }
 
@@ -18,6 +19,7 @@ export class UserRepository {
   ): Promise<User> {
     return this.$db.user.findFirst({
       where: { ...filters },
+      include: { userSocialMedias: true, repositories: true },
     });
   }
   public async findUsers(
@@ -29,6 +31,7 @@ export class UserRepository {
         ...userFilters,
         deletedAt: null,
       },
+      include: { userSocialMedias: true, repositories: true },
     });
   }
 
@@ -37,6 +40,7 @@ export class UserRepository {
   ): Promise<User> {
     return this.$db.user.create({
       data: { ...data },
+      include: { userSocialMedias: true, repositories: true },
     });
   }
 
@@ -46,6 +50,7 @@ export class UserRepository {
     return this.$db.user.update({
       where: { id: data.id as string },
       data: { ...data, deletedAt: null },
+      include: { userSocialMedias: true, repositories: true },
     });
   }
 
@@ -57,6 +62,7 @@ export class UserRepository {
         deletedAt: new Date(),
         updatedAt: new Date(),
       },
+      include: { userSocialMedias: true, repositories: true },
     });
   }
 }

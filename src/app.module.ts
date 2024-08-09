@@ -1,13 +1,15 @@
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { forwardRef, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-import {
-  ApolloFederationDriverConfig,
-  ApolloFederationDriver,
-} from '@nestjs/apollo';
-import { SharedModule } from './shared/shared.module';
-import { UserModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
+import { UserRepositoriesModule } from './users/user-repositories/user-repositories.module';
+import { UserSocialMediasModule } from './users/user-social-media/user-social-media.module';
+import { UserModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     forwardRef(() => SharedModule),
     UserModule,
+    UserSocialMediasModule,
+    UserRepositoriesModule,
     AuthModule,
   ],
   providers: [],

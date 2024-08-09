@@ -37,4 +37,10 @@ export class CreateUserDto {
   @MinLength(11)
   @MaxLength(11)
   cpf: string;
+
+  @Field(() => String, { nullable: true })
+  address?: string;
+
+  @Field(() => String, { nullable: true })
+  phone?: string;
 }
