@@ -28,7 +28,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "UserRepositories" (
     "id" TEXT NOT NULL,
-    "language" "LanguageEnum",
+    "language" "LanguageEnum"[],
     "link" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

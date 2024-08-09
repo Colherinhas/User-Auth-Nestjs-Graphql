@@ -9,8 +9,8 @@ export class UserRepositoriesModel implements UserRepositories {
   @Field(() => String)
   link: string;
 
-  @Field(() => LanguageEnum)
-  language: LanguageEnum;
+  @Field(() => [LanguageEnum])
+  language: LanguageEnum[];
 
   @Field(() => String)
   userId: string;

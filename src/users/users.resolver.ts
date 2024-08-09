@@ -1,15 +1,15 @@
 import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { FindUserFilterDto } from './dtos/find-user-filters.dto';
-import { CreateUserUseCase } from './use-cases/create-user.use-case';
-import { CreateUserDto } from './dtos/create-user.dto';
-import { UpdateUserDto } from './dtos/update-user.dto';
-import { FindUserUseCase } from './use-cases/find-users.use-case';
-import { UpdateUserUseCase } from './use-cases/update-user.use-case';
-import { FindUserByIdUseCase } from './use-cases/find-user-by-id.use-case';
-import { SoftDeleteUserUseCase } from './use-cases/soft-delete-user.use-case';
-import { UserResponseModel } from './models/user-response.model';
 import { JwtGuard } from 'src/shared/guards/jwt-auth.guard';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { FindUserFilterDto } from './dtos/find-user-filters.dto';
+import { UpdateUserDto } from './dtos/update-user.dto';
+import { UserResponseModel } from './models/user-response.model';
+import { CreateUserUseCase } from './use-cases/create-user.use-case';
+import { FindUserByIdUseCase } from './use-cases/find-user-by-id.use-case';
+import { FindUserUseCase } from './use-cases/find-users.use-case';
+import { SoftDeleteUserUseCase } from './use-cases/soft-delete-user.use-case';
+import { UpdateUserUseCase } from './use-cases/update-user.use-case';
 
 @Resolver()
 export class UserResolver {
@@ -50,6 +50,7 @@ export class UserResolver {
     })
     data: CreateUserDto,
   ): Promise<UserResponseModel> {
+    console.log('create user called');
     return this.$create.execute(data);
   }
 

@@ -20,14 +20,20 @@ export class UserModel {
   @Field(() => UserStatusEnum)
   status: UserStatusEnum;
 
-  @Field(() => Date)
-  createdAt: Date;
+  @Field(() => String, { nullable: true })
+  phone: string | null;
+
+  @Field(() => String, { nullable: true })
+  address: string | null;
 
   @Field(() => String)
   cpf: string;
 
-  @Field(() => String)
-  photoUrl: string;
+  @Field(() => Date)
+  createdAt: Date;
+
+  @Field(() => String, { nullable: true })
+  photoUrl: string | null;
 
   @Field(() => Date, {
     nullable: true,

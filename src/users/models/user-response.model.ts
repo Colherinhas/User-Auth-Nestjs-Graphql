@@ -14,6 +14,12 @@ export class UserResponseModel {
   @Field(() => String)
   email: string;
 
+  @Field(() => String, { nullable: true })
+  phone: string | null;
+
+  @Field(() => String, { nullable: true })
+  address: string | null;
+
   @Field(() => UserStatusEnum)
   status: UserStatusEnum;
 
@@ -23,8 +29,8 @@ export class UserResponseModel {
   @Field(() => String)
   cpf: string;
 
-  @Field(() => String)
-  photoUrl: string;
+  @Field(() => String, { nullable: true })
+  photoUrl: string | null;
 
   @Field(() => Date, {
     nullable: true,

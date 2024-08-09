@@ -3,7 +3,6 @@ import {
   IsEmail,
   IsNotEmpty,
   IsOptional,
-  IsUrl,
   Length,
   MaxLength,
   MinLength,
@@ -25,8 +24,7 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @Field(() => String)
-  @IsUrl()
+  @Field(() => String, { nullable: true })
   @IsOptional()
   photoUrl?: string;
 
