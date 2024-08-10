@@ -1,8 +1,8 @@
-import { Inject, Query } from '@nestjs/common';
+import { Inject } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { LoginService } from './service/login.service';
-import { AuthModel } from './models/auth.model';
 import { UserLoginDto } from './dtos/userLogin.dto';
+import { AuthModel } from './models/auth.model';
+import { LoginService } from './service/login.service';
 
 @Resolver()
 export class AuthResolver {
@@ -14,7 +14,6 @@ export class AuthResolver {
     @Args('data', { type: () => UserLoginDto })
     data: UserLoginDto,
   ): Promise<AuthModel> {
-    console.log('tentou fazer login');
     return this.$login.execute(data);
   }
 }

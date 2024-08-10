@@ -4,13 +4,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UserRepository } from 'src/users/users.repository';
-import { AuthModel } from '../models/auth.model';
-import { UserLoginDto } from '../dtos/userLogin.dto';
 import { UserStatusEnum } from '@prisma/client';
 import { HashHelper } from 'src/shared/helpers/hash.helper';
-import { UserModel } from 'src/users/models/user.model';
 import { JwtHelper } from 'src/shared/helpers/jwt.helper';
+import { UserModel } from 'src/users/models/user.model';
+import { UserRepository } from 'src/users/users.repository';
+import { UserLoginDto } from '../dtos/userLogin.dto';
+import { AuthModel } from '../models/auth.model';
 
 @Injectable()
 export class LoginService {
@@ -36,10 +36,13 @@ export class LoginService {
       email: data.email,
       deletedAt: null,
     });
-    if (!user || user.status === UserStatusEnum.BANNED || user.deletedAt) {
+    if (!user) {
       throw new NotFoundException(
-        'User not found. If it exists, must been banned or deleted.',
+        'User not found. If it exists, must have been banned or deleted.',
       );
+    }
+    if (user.status === UserStatusEnum.BANNED || user.deletedAt) {
+      throw new NotFoundException('User banned or deleted.');
     }
     return user;
   }

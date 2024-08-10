@@ -16,7 +16,6 @@ export class UserRepositoriesResolver {
     @Args('data', { type: () => CreateUserRepositoryDto })
     data: CreateUserRepositoryDto,
   ): Promise<UserRepositoriesModel> {
-    console.log('tried repo');
     return this.$create.execute(data);
   }
 }

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  test-db:
+    image: postgres
+    container_name: test-db
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - app-network
+    volumes:
+      - .docker/pgdata:/var/lib/postgresql/data
+
+networks:
+  app-network:
+    driver: bridge
