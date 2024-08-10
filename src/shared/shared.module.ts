@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { DbConnection } from './db/db.connection';
 import { registerEnumType } from '@nestjs/graphql';
-import { LanguageEnum, SocialMediaEnum, UserStatusEnum } from '@prisma/client';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { UserStatusEnum } from '@prisma/client';
+import { DbConnection } from './db/db.connection';
+import { JwtGuard } from './guards/jwt-auth.guard';
 import { HashHelper } from './helpers/hash.helper';
 import { JwtHelper } from './helpers/jwt.helper';
-import { JwtGuard } from './guards/jwt-auth.guard';
-import { JwtModule, JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -21,42 +21,6 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 })
 export class SharedModule {
   constructor() {
-    registerEnumType(LanguageEnum, {
-      name: 'ProgrammingLanguages',
-      description: 'Available Programming Languages',
-      valuesMap: {
-        JavaScript: { description: 'JavaScript' },
-        Python: { description: 'Python' },
-        Java: { description: 'Java' },
-        CSHARP: { description: 'CSHARP' },
-        CPLUSPLUS: { description: 'CPLUSPLUS' },
-        PHP: { description: 'PHP' },
-        TypeScript: { description: 'TypeScript' },
-        Ruby: { description: 'Ruby' },
-        Swift: { description: 'Swift' },
-        Go: { description: 'Go' },
-        Kotlin: { description: 'Kotlin' },
-        Rust: { description: 'Rust' },
-        Dart: { description: 'Dart' },
-        Scala: { description: 'Scala' },
-        ShellScripting: { description: 'ShellScripting' },
-        Perl: { description: 'Perl' },
-        ObjectiveC: { description: 'ObjectiveC' },
-        R: { description: 'R' },
-        Elixir: { description: 'Elixir' },
-        Haskell: { description: 'Haskell' },
-      },
-    });
-    registerEnumType(SocialMediaEnum, {
-      name: 'SocialMedia',
-      description: 'Available Social Media',
-      valuesMap: {
-        INSTAGRAM: { description: 'INSTAGRAM' },
-        FACEBOOK: { description: 'FACEBOOK' },
-        LINKEDIN: { description: 'LINKEDIN' },
-        GITHUB: { description: 'GITHUB' },
-      },
-    });
     registerEnumType(UserStatusEnum, {
       name: 'UserStatusEnum',
       description: 'User Status Available',

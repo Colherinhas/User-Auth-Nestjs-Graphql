@@ -2,9 +2,6 @@
 CREATE TYPE "LanguageEnum" AS ENUM ('JavaScript', 'Python', 'Java', 'CSHARP', 'CPLUSPLUS', 'PHP', 'TypeScript', 'Ruby', 'Swift', 'Go', 'Kotlin', 'Rust', 'Dart', 'Scala', 'ShellScripting', 'Perl', 'ObjectiveC', 'R', 'Elixir', 'Haskell');
 
 -- CreateEnum
-CREATE TYPE "SocialMediaEnum" AS ENUM ('INSTAGRAM', 'FACEBOOK', 'LINKEDIN', 'GITHUB');
-
--- CreateEnum
 CREATE TYPE "UserStatusEnum" AS ENUM ('ACTIVE', 'INACTIVE', 'BANNED');
 
 -- CreateTable
@@ -40,7 +37,7 @@ CREATE TABLE "UserRepositories" (
 CREATE TABLE "UserSocialMedia" (
     "id" TEXT NOT NULL,
     "link" TEXT NOT NULL,
-    "socialMedia" "SocialMediaEnum" NOT NULL,
+    "socialMedia" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),

@@ -1,5 +1,4 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { SocialMediaEnum } from '@prisma/client';
 import { UserModel } from '../../models/user.model';
 
 @ObjectType()
@@ -10,8 +9,8 @@ export class UserSocialMediasModel {
   @Field(() => String)
   link: string;
 
-  @Field(() => SocialMediaEnum, { nullable: true })
-  socialMedia: SocialMediaEnum;
+  @Field(() => String, { nullable: true })
+  socialMedia: string;
 
   @Field(() => String)
   userId: string;

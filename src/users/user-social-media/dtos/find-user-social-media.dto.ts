@@ -1,11 +1,10 @@
-import { Field, ID, InputType } from '@nestjs/graphql';
-import { SocialMediaEnum } from '@prisma/client';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class FindUserSocialMediaDto {
   @Field(() => String)
-  userId?: String;
+  userId?: string;
 
-  @Field(() => SocialMediaEnum)
-  socialMedia?: SocialMediaEnum;
+  @Field(() => String)
+  socialMedia?: string;
 }
