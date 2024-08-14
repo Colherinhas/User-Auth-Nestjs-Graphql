@@ -9,6 +9,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "main": "npm install && npm install @nestjs/config && npx prisma generate && npm run start",
     "build": "nest build",
     "clean": "npm cache clean --force && rd /s /q node_modules && npm install",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
